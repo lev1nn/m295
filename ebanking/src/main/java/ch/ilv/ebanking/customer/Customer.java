@@ -11,15 +11,21 @@ import lombok.Data;
 public class Customer {
     @Id
     @GeneratedValue
+    @NotEmpty
     private Long id;
     @Column(length = 100, nullable = false)
-    @Size(max = 100)
     @NotEmpty
     private String firstname;
     @Column(length = 100, nullable = false)
-    @Size(max = 100)
     @NotEmpty
     private String lastname;
+    @Size(min = 14)
+    @NotEmpty
+    private int age;
+    @NotEmpty
+    private String street;
+    @NotEmpty
+    private String city;
 
     public Customer() {
     }
