@@ -18,7 +18,7 @@ public class Account {
     private String accountName;
     private long balance;
     @OneToOne(optional = false)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     public Account() {
