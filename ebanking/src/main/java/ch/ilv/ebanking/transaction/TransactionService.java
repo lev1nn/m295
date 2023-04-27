@@ -23,21 +23,21 @@ public class TransactionService {
                 .orElseThrow(() -> new EntityNotFoundException());
     }
 
-    public Transaction insertTransaction(Transaction Transaction) {
-        return repository.save(Transaction);
+    public Transaction insertTransaction(Transaction transaction) {
+        return repository.save(transaction);
     }
 
-    public Transaction updateTransaction(Transaction Transaction, Long id) {
+    public Transaction updateTransaction(Transaction transaction, Long id) {
         return repository.findById(id)
-                .map(TransactionOrig -> {
-                    TransactionOrig.setPayingAccount(Transaction.getPayingAccount());
-                    TransactionOrig.setReceivingAccount(Transaction.getReceivingAccount());
-                    TransactionOrig.setAmount(Transaction.getAmount());
-                    TransactionOrig.setTime(Transaction.getTime());
-                    TransactionOrig.setDescription(Transaction.getDescription());
-                    return repository.save(TransactionOrig);
+                .map(transactionOrig -> {
+                    transactionOrig.setPayingAccount(transaction.getPayingAccount());
+                    transactionOrig.setReceivingAccount(transaction.getReceivingAccount());
+                    transactionOrig.setAmount(transaction.getAmount());
+                    transactionOrig.setTime(transaction.getTime());
+                    transactionOrig.setDescription(transaction.getDescription());
+                    return repository.save(transactionOrig);
                 })
-                .orElseGet(() -> repository.save(Transaction));
+                .orElseGet(() -> repository.save(transaction));
     }
 
     public MessageResponse deleteTransaction(Long id) {

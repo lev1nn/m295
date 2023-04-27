@@ -23,19 +23,19 @@ public class AccountService {
                 .orElseThrow(() -> new EntityNotFoundException());
     }
 
-    public Account insertAccount(Account Account) {
-        return repository.save(Account);
+    public Account insertAccount(Account account) {
+        return repository.save(account);
     }
 
-    public Account updateAccount(Account Account, Long id) {
+    public Account updateAccount(Account account, Long id) {
         return repository.findById(id)
-                .map(AccountOrig -> {
-                    AccountOrig.setAccountname(Account.getAccountname());
-                    AccountOrig.setBalance(Account.getBalance());
-                    AccountOrig.setCustomer(Account.getCustomer());
-                    return repository.save(AccountOrig);
+                .map(accountOrig -> {
+                    accountOrig.setAccountname(account.getAccountname());
+                    accountOrig.setBalance(account.getBalance());
+                    accountOrig.setCustomer(account.getCustomer());
+                    return repository.save(accountOrig);
                 })
-                .orElseGet(() -> repository.save(Account));
+                .orElseGet(() -> repository.save(account));
     }
 
     public MessageResponse deleteAccount(Long id) {

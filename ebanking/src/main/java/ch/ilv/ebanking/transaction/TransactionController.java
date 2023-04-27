@@ -14,37 +14,37 @@ import java.util.List;
 @SecurityRequirement(name="bearerAuth")
 @RestController
 public class TransactionController {
-    public final TransactionService TransactionService;
+    public final TransactionService transactionService;
 
-    public TransactionController(TransactionRepository TransactionRepository, TransactionService TransactionService) {
-        this.TransactionService = TransactionService;
+    public TransactionController(TransactionService transactionService) {
+        this.transactionService = transactionService;
     }
 
     @GetMapping("api/Transaction")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<List<Transaction>> all() {
-        List<Transaction> result = TransactionService.getTransactions();
+        List<Transaction> result = transactionService.getTransactions();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("api/Transaction/{id}")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<Transaction> one(@PathVariable Long id) {
-        Transaction Transaction = TransactionService.getTransaction(id);
-        return new ResponseEntity<>(Transaction, HttpStatus.OK);
+        Transaction transaction = transactionService.getTransaction(id);
+        return new ResponseEntity<>(transaction, HttpStatus.OK);
     }
 
     @PostMapping("api/Transaction")
     @RolesAllowed(Roles.Admin)
-    public ResponseEntity<Transaction> newTransaction(@Valid @RequestBody Transaction Transaction) {
-        Transaction savedTransaction = TransactionService.insertTransaction(Transaction);
+    public ResponseEntity<Transaction> newTransaction(@Valid @RequestBody Transaction transaction) {
+        Transaction savedTransaction = transactionService.insertTransaction(transaction);
         return new ResponseEntity<>(savedTransaction, HttpStatus.OK);
     }
 
     @PutMapping("api/Transaction/{id}")
     @RolesAllowed(Roles.Admin)
-    public ResponseEntity<Transaction> updateTransaction(@Valid @RequestBody Transaction Transaction, @PathVariable Long id) {
-        Transaction savedTransaction = TransactionService.updateTransaction(Transaction, id);
+    public ResponseEntity<Transaction> updateTransaction(@Valid @RequestBody Transaction transaction, @PathVariable Long id) {
+        Transaction savedTransaction = transactionService.updateTransaction(transaction, id);
         return new ResponseEntity<>(savedTransaction, HttpStatus.OK);
     }
 
@@ -52,7 +52,7 @@ public class TransactionController {
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<MessageResponse> deleteTransaction(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(TransactionService.deleteTransaction(id));
+            return ResponseEntity.ok(transactionService.deleteTransaction(id));
         } catch (Throwable t) {
             return ResponseEntity.internalServerError().build();
         }

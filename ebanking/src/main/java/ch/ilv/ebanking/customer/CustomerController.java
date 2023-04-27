@@ -16,7 +16,7 @@ import java.util.List;
 public class CustomerController {
     public final CustomerService customerService;
 
-    public CustomerController(CustomerRepository customerRepository, CustomerService customerService) {
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
@@ -30,21 +30,21 @@ public class CustomerController {
     @GetMapping("api/Customer/{id}")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<Customer> one(@PathVariable Long id) {
-        Customer Customer = customerService.getCustomer(id);
-        return new ResponseEntity<>(Customer, HttpStatus.OK);
+        Customer customer = customerService.getCustomer(id);
+        return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
     @PostMapping("api/Customer")
     @RolesAllowed(Roles.Admin)
-    public ResponseEntity<Customer> newCustomer(@Valid @RequestBody Customer Customer) {
-        Customer savedCustomer = customerService.insertCustomer(Customer);
+    public ResponseEntity<Customer> newCustomer(@Valid @RequestBody Customer customer) {
+        Customer savedCustomer = customerService.insertCustomer(customer);
         return new ResponseEntity<>(savedCustomer, HttpStatus.OK);
     }
 
     @PutMapping("api/Customer/{id}")
     @RolesAllowed(Roles.Admin)
-    public ResponseEntity<Customer> updateCustomer(@Valid @RequestBody Customer Customer, @PathVariable Long id) {
-        Customer savedCustomer = customerService.updateCustomer(Customer, id);
+    public ResponseEntity<Customer> updateCustomer(@Valid @RequestBody Customer customer, @PathVariable Long id) {
+        Customer savedCustomer = customerService.updateCustomer(customer, id);
         return new ResponseEntity<>(savedCustomer, HttpStatus.OK);
     }
 

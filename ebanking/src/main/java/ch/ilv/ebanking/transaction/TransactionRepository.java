@@ -1,6 +1,5 @@
 package ch.ilv.ebanking.transaction;
 
-import ch.ilv.ebanking.customer.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

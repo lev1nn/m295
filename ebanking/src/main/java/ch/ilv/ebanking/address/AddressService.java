@@ -23,20 +23,20 @@ public class AddressService {
                 .orElseThrow(() -> new EntityNotFoundException());
     }
 
-    public Address insertAddress(Address Address) {
-        return repository.save(Address);
+    public Address insertAddress(Address address) {
+        return repository.save(address);
     }
 
-    public Address updateAddress(Address Address, Long id) {
+    public Address updateAddress(Address address, Long id) {
         return repository.findById(id)
-                .map(AddressOrig -> {
-                    AddressOrig.setStreet(Address.getStreet());
-                    AddressOrig.setStreetNumber(Address.getStreetNumber());
-                    AddressOrig.setCity(Address.getCity());
-                    AddressOrig.setCountry(Address.getCountry());
-                    return repository.save(AddressOrig);
+                .map(addressOrig -> {
+                    addressOrig.setStreet(address.getStreet());
+                    addressOrig.setStreetNumber(address.getStreetNumber());
+                    addressOrig.setCity(address.getCity());
+                    addressOrig.setCountry(address.getCountry());
+                    return repository.save(addressOrig);
                 })
-                .orElseGet(() -> repository.save(Address));
+                .orElseGet(() -> repository.save(address));
     }
 
     public MessageResponse deleteAddress(Long id) {

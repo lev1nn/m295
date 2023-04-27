@@ -14,37 +14,37 @@ import java.util.List;
 @SecurityRequirement(name="bearerAuth")
 @RestController
 public class AddressController {
-    public final AddressService AddressService;
+    public final AddressService addressService;
 
-    public AddressController(AddressRepository AddressRepository, AddressService AddressService) {
-        this.AddressService = AddressService;
+    public AddressController(AddressService addressService) {
+        this.addressService = addressService;
     }
 
     @GetMapping("api/Address")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<List<Address>> all() {
-        List<Address> result = AddressService.getAddresses();
+        List<Address> result = addressService.getAddresses();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("api/Address/{id}")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<Address> one(@PathVariable Long id) {
-        Address Address = AddressService.getAddress(id);
-        return new ResponseEntity<>(Address, HttpStatus.OK);
+        Address address = addressService.getAddress(id);
+        return new ResponseEntity<>(address, HttpStatus.OK);
     }
 
     @PostMapping("api/Address")
     @RolesAllowed(Roles.Admin)
-    public ResponseEntity<Address> newAddress(@Valid @RequestBody Address Address) {
-        Address savedAddress = AddressService.insertAddress(Address);
+    public ResponseEntity<Address> newAddress(@Valid @RequestBody Address address) {
+        Address savedAddress = addressService.insertAddress(address);
         return new ResponseEntity<>(savedAddress, HttpStatus.OK);
     }
 
     @PutMapping("api/Address/{id}")
     @RolesAllowed(Roles.Admin)
-    public ResponseEntity<Address> updateAddress(@Valid @RequestBody Address Address, @PathVariable Long id) {
-        Address savedAddress = AddressService.updateAddress(Address, id);
+    public ResponseEntity<Address> updateAddress(@Valid @RequestBody Address address, @PathVariable Long id) {
+        Address savedAddress = addressService.updateAddress(address, id);
         return new ResponseEntity<>(savedAddress, HttpStatus.OK);
     }
 
@@ -52,7 +52,7 @@ public class AddressController {
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<MessageResponse> deleteAddress(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(AddressService.deleteAddress(id));
+            return ResponseEntity.ok(addressService.deleteAddress(id));
         } catch (Throwable t) {
             return ResponseEntity.internalServerError().build();
         }
