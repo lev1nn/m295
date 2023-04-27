@@ -13,12 +13,12 @@ public class Customer {
     private Long id;
     @Column(length = 100, nullable = false)
     @NotEmpty
-    private String username;
+    private String userName;
     @NotEmpty
-    private String firstname;
+    private String firstName;
     @Column(length = 100, nullable = false)
     @NotEmpty
-    private String lastname;
+    private String lastName;
     private int age;
     @OneToOne(optional = true)
     @JoinColumn(name = "address_id")

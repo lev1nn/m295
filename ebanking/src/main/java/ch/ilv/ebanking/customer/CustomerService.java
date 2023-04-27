@@ -15,7 +15,7 @@ public class CustomerService {
     }
 
     public List<Customer> getCustomers() {
-        return repository.findByOrderByLastnameAscFirstnameAsc();
+        return repository.findByOrderByLastNameAscFirstNameAsc();
     }
 
     public Customer getCustomer(Long id) {
@@ -30,8 +30,9 @@ public class CustomerService {
     public Customer updateCustomer(Customer customer, Long id) {
         return repository.findById(id)
                 .map(customerOrig -> {
-                    customerOrig.setFirstname(customer.getFirstname());
-                    customerOrig.setLastname(customer.getLastname());
+                    customerOrig.setUserName(customer.getUserName());
+                    customerOrig.setFirstName(customer.getFirstName());
+                    customerOrig.setLastName(customer.getLastName());
                     customerOrig.setAge(customer.getAge());
                     customerOrig.setAddress(customer.getAddress());
                     return repository.save(customerOrig);

@@ -29,7 +29,7 @@ public class CustomerController {
     public ResponseEntity<List<Customer>> all() {
         Jwt user = (Jwt)SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-        String s = user.getClaim("preferred_username");
+        String preferredUsername = user.getClaim("preferred_username");
 
         List<Customer> result = customerService.getCustomers();
         return new ResponseEntity<>(result, HttpStatus.OK);
