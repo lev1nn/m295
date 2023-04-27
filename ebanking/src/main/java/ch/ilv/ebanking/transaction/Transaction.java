@@ -12,10 +12,10 @@ public class Transaction {
     @GeneratedValue
     private Long id;
     @OneToOne(optional = false)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "paying_account_id")
     private Account payingAccount;
     @OneToOne(optional = false)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "receiving_account_id")
     private Account receivingAccount;
     private double amount;
     @NotEmpty
