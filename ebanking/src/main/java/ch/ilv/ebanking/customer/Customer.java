@@ -1,6 +1,7 @@
 package ch.ilv.ebanking.customer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import ch.ilv.ebanking.account.Account;
+import ch.ilv.ebanking.address.Address;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -22,10 +23,9 @@ public class Customer {
     @Size(min = 14)
     @NotEmpty
     private int age;
-    @NotEmpty
-    private String street;
-    @NotEmpty
-    private String city;
+    @OneToOne(optional = false)
+    @JoinColumn(name = "id")
+    private Address address;
 
     public Customer() {
     }
