@@ -15,7 +15,7 @@ public class Account {
     @Column(length = 100, unique = true, nullable = false)
     @Size(max = 100)
     @NotEmpty
-    private String accountname;
+    private String accountName;
     private long balance;
     @OneToOne(optional = false)
     @JoinColumn(name = "id")

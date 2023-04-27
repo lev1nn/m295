@@ -15,7 +15,7 @@ public class AccountService {
     }
 
     public List<Account> getAccounts() {
-        return repository.findByOrderByAccountnameAsc();
+        return repository.findByOrderByAccountNameAsc();
     }
 
     public Account getAccount(Long id) {
@@ -30,7 +30,7 @@ public class AccountService {
     public Account updateAccount(Account account, Long id) {
         return repository.findById(id)
                 .map(accountOrig -> {
-                    accountOrig.setAccountname(account.getAccountname());
+                    accountOrig.setAccountName(account.getAccountName());
                     accountOrig.setBalance(account.getBalance());
                     accountOrig.setCustomer(account.getCustomer());
                     return repository.save(accountOrig);
