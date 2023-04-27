@@ -1,7 +1,8 @@
 package ch.ilv.ebanking.address;
 
-import ch.ilv.ebanking.customer.Customer;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
@@ -13,7 +14,6 @@ public class Address {
     private Long id;
     @NotEmpty
     private String street;
-    @NotEmpty
     private int streetNumber;
     @NotEmpty
     private String city;

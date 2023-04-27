@@ -17,7 +17,6 @@ public class Transaction {
     @OneToOne(optional = false)
     @JoinColumn(name = "id")
     private Account receivingAccount;
-    @NotEmpty
     private double amount;
     @NotEmpty
     private String time;

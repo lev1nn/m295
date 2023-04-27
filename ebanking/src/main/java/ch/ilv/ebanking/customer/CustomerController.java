@@ -7,12 +7,16 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @SecurityRequirement(name="bearerAuth")
 @RestController
+@Validated
 public class CustomerController {
     public final CustomerService customerService;
 
@@ -23,6 +27,10 @@ public class CustomerController {
     @GetMapping("api/Customer")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<List<Customer>> all() {
+        Jwt user = (Jwt)SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String s = user.getClaim("preferred_username");
+
         List<Customer> result = customerService.getCustomers();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
