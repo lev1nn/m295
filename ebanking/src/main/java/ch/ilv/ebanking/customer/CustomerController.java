@@ -28,7 +28,7 @@ public class CustomerController {
     }
 
     @RolesAllowed("admin")
-    @PutMapping("/delete-person")
+    @DeleteMapping("/delete-person")
     public String deletePerson(@RequestBody Customer customer) {
         //customerRepository.save(customer);
         return  customer.getFirstname() + " " + customer.getLastname() + " deleted!";
