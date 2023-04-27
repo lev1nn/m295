@@ -4,7 +4,9 @@ import ch.ilv.ebanking.customer.Customer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
+@Data
 @Entity
 public class Account {
     @Id

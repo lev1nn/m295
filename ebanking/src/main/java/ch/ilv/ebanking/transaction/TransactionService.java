@@ -1,2 +1,7 @@
-package ch.ilv.ebanking.transaction;public class TransactionService {
+package ch.ilv.ebanking.transaction;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class TransactionService {
 }

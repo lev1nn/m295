@@ -1,2 +1,7 @@
-package ch.ilv.ebanking.address;public class AddressService {
+package ch.ilv.ebanking.address;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class AddressService {
 }

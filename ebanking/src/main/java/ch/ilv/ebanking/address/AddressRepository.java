@@ -1,2 +1,8 @@
-package ch.ilv.ebanking.address;public interface AddressRepository {
+package ch.ilv.ebanking.address;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface AddressRepository extends JpaRepository<Address, Long> {
 }
