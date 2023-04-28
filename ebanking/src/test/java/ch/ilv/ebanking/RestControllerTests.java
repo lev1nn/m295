@@ -2,6 +2,7 @@ package ch.ilv.ebanking;
 
 import ch.ilv.ebanking.address.Address;
 import ch.ilv.ebanking.address.AddressRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
@@ -20,6 +21,9 @@ import org.springframework.web.client.RestTemplate;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -40,7 +44,7 @@ class RestControllerTests {
 
     @BeforeAll
     void setup() {
-        this.addressRepository.save(new Address("Wallstreet", 94, "New York", "USA"));
+        this.addressRepository.save(new Address("Wall Street", 94, "New York", "USA"));
         this.addressRepository.save(new Address("Broadway", 562, "New York", "USA"));
     }
 
@@ -49,10 +53,79 @@ class RestControllerTests {
     void testGetAddresses() throws Exception {
         String accessToken = obtainAccessToken();
 
-        api.perform(get("/api/Address").header("Authorization", "Bearer " + accessToken)
+        api.perform(get("/api/Address")
+                        .header("Authorization", "Bearer " + accessToken)
                         .with(csrf()))
                 .andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Wallstreet")));
+                .andExpect(content().string(containsString("Wall Street")));
+    }
+
+    @Test
+    @Order(2)
+    void testSaveVehicle() throws Exception {
+        Address address = new Address();
+
+        address.setStreet("William Street");
+        address.setStreetNumber(123);
+        address.setCity("New York");
+        address.setCountry("USA");
+
+        String accessToken = obtainAccessToken();
+        String body = new ObjectMapper().writeValueAsString(address);
+
+        api.perform(post("/api/Address")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(body)
+                        .header("Authorization", "Bearer " + accessToken)
+                        .with(csrf()))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("William Street")));
+    }
+
+    @Test
+    @Order(3)
+    void testUpdateAddress() throws Exception {
+
+        Address address = new Address();
+
+        /*address.setStreet("William Street");
+        address.setStreetNumber(123);
+        address.setCity("New York");
+        address.setCountry("USA");*/
+
+        String accessToken = obtainAccessToken();
+        String body = new ObjectMapper().writeValueAsString(address);
+
+        api.perform(put("/api/Address")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(body)
+                        .header("Authorization", "Bearer " + accessToken)
+                        .with(csrf()))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("William Street")));
+    }
+
+    @Test
+    @Order(4)
+    void testDeleteAddress() throws Exception {
+
+        Address address = new Address();
+
+        /*address.setStreet("William Street");
+        address.setStreetNumber(123);
+        address.setCity("New York");
+        address.setCountry("USA");*/
+
+        String accessToken = obtainAccessToken();
+        String body = new ObjectMapper().writeValueAsString(address);
+
+        api.perform(delete("/api/Address")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(body)
+                        .header("Authorization", "Bearer " + accessToken)
+                        .with(csrf()))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("William Street")));
     }
 
     private String obtainAccessToken() {
