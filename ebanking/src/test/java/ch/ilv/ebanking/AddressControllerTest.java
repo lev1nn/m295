@@ -13,7 +13,6 @@ import java.util.Optional;
 import static org.mockito.Mockito.*;
 
 class AddressControllerTest {
-
     private AddressService addressServiceMock;
 
     private AddressController addressControllerMock = mock(AddressController.class);
