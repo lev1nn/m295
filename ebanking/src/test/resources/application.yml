@@ -1,0 +1,18 @@
+server.port: 8081
+spring:
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  #datasource:
+  #  url: jdbc:postgresql://localhost:5432/m-295-demo
+  #  username: postgres
+  #  password: postgres
+  #  driverClassName: org.postgresql.Driver
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/ILV
+

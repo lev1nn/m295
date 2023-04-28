@@ -19,4 +19,14 @@ public class Address {
     private String city;
     @NotEmpty
     private String country;
+
+    public Address() {
+    }
+
+    public Address(String street, int streetNumber, String city, String country) {
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.city = city;
+        this.country = country;
+    }
 }
