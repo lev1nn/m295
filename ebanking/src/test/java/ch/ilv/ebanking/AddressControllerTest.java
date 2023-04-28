@@ -1,5 +1,9 @@
-package ch.ilv.ebanking.address;
+package ch.ilv.ebanking;
 
+import ch.ilv.ebanking.address.Address;
+import ch.ilv.ebanking.address.AddressController;
+import ch.ilv.ebanking.address.AddressRepository;
+import ch.ilv.ebanking.address.AddressService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +19,7 @@ class AddressControllerTest {
     private AddressController addressControllerMock = mock(AddressController.class);
     private final AddressRepository addressRepositoryMock = mock(AddressRepository.class);
 
-    private final  Address addressMock = mock(Address.class);
+    private final Address addressMock = mock(Address.class);
 
     @BeforeEach
     void setUp() {
