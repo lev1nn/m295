@@ -18,8 +18,6 @@ public class Transaction {
     @JoinColumn(name = "receiving_account_id")
     private Account receivingAccount;
     private double amount;
-    @NotEmpty
     private String time;
-    @NotEmpty
     private String description;
 }

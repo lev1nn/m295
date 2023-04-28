@@ -24,6 +24,8 @@ public class TransactionService {
     }
 
     public Transaction insertTransaction(Transaction transaction) {
+        transaction.getPayingAccount().setBalance((long) (transaction.getPayingAccount().getBalance() - transaction.getAmount()));
+        transaction.getReceivingAccount().setBalance((long) (transaction.getReceivingAccount().getBalance() + transaction.getAmount()));
         return repository.save(transaction);
     }
 
