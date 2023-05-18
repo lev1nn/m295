@@ -61,4 +61,12 @@ public class AccountController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+    @GetMapping("api/account/customer/{id}")
+    @RolesAllowed(Roles.Admin)
+    public ResponseEntity<List<Account>> getAccountsOfCustomer(@PathVariable("id") Long customerId){
+        return ResponseEntity.ok(this.accountService.getAccountsOfCustomer(customerId));
+    }
+
+
 }
