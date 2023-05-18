@@ -1,6 +1,8 @@
-package ch.ilv.ebanking.account;
+package ch.ilv.ebanking.controller;
 
+import ch.ilv.ebanking.service.AccountService;
 import ch.ilv.ebanking.base.MessageResponse;
+import ch.ilv.ebanking.model.Account;
 import ch.ilv.ebanking.security.Roles;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.annotation.security.RolesAllowed;
@@ -22,35 +24,35 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping("api/Account")
+    @GetMapping("api/account")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<List<Account>> all() {
         List<Account> result = accountService.getAccounts();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("api/Account/{id}")
+    @GetMapping("api/account/{id}")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<Account> one(@PathVariable Long id) {
         Account account = accountService.getAccount(id);
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
-    @PostMapping("api/Account")
+    @PostMapping("api/account")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<Account> newAccount(@Valid @RequestBody Account account) {
         Account savedAccount = accountService.insertAccount(account);
         return new ResponseEntity<>(savedAccount, HttpStatus.OK);
     }
 
-    @PutMapping("api/Account/{id}")
+    @PutMapping("api/account/{id}")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<Account> updateAccount(@Valid @RequestBody Account account, @PathVariable Long id) {
         Account savedAccount = accountService.updateAccount(account, id);
         return new ResponseEntity<>(savedAccount, HttpStatus.OK);
     }
 
-    @DeleteMapping("api/Account/{id}")
+    @DeleteMapping("api/account/{id}")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<MessageResponse> deleteAccount(@PathVariable Long id) {
         try {
@@ -59,4 +61,12 @@ public class AccountController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+    @GetMapping("api/account/customer/{id}")
+    @RolesAllowed(Roles.Read)
+    public ResponseEntity<List<Account>> getAccountsOfCustomer(@PathVariable("id") Long customerId){
+        return ResponseEntity.ok(this.accountService.getAccountsOfCustomer(customerId));
+    }
+
+
 }

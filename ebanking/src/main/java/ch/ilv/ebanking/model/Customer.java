@@ -1,6 +1,6 @@
-package ch.ilv.ebanking.customer;
+package ch.ilv.ebanking.model;
 
-import ch.ilv.ebanking.address.Address;
+import ch.ilv.ebanking.model.Address;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;

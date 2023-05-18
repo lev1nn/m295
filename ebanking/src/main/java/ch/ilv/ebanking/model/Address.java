@@ -1,4 +1,4 @@
-package ch.ilv.ebanking.address;
+package ch.ilv.ebanking.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

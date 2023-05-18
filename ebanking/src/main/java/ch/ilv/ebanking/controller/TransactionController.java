@@ -1,7 +1,9 @@
-package ch.ilv.ebanking.transaction;
+package ch.ilv.ebanking.controller;
 
 import ch.ilv.ebanking.base.MessageResponse;
+import ch.ilv.ebanking.model.Transaction;
 import ch.ilv.ebanking.security.Roles;
+import ch.ilv.ebanking.service.TransactionService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
@@ -22,35 +24,35 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @GetMapping("api/Transaction")
+    @GetMapping("api/transaction")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<List<Transaction>> all() {
         List<Transaction> result = transactionService.getTransactions();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("api/Transaction/{id}")
+    @GetMapping("api/transaction/{id}")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<Transaction> one(@PathVariable Long id) {
         Transaction transaction = transactionService.getTransaction(id);
         return new ResponseEntity<>(transaction, HttpStatus.OK);
     }
 
-    @PostMapping("api/Transaction")
+    @PostMapping("api/transaction")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<Transaction> newTransaction(@Valid @RequestBody Transaction transaction) {
         Transaction savedTransaction = transactionService.insertTransaction(transaction);
         return new ResponseEntity<>(savedTransaction, HttpStatus.OK);
     }
 
-    @PutMapping("api/Transaction/{id}")
+    @PutMapping("api/transaction/{id}")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<Transaction> updateTransaction(@Valid @RequestBody Transaction transaction, @PathVariable Long id) {
         Transaction savedTransaction = transactionService.updateTransaction(transaction, id);
         return new ResponseEntity<>(savedTransaction, HttpStatus.OK);
     }
 
-    @DeleteMapping("api/Transaction/{id}")
+    @DeleteMapping("api/transaction/{id}")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<MessageResponse> deleteTransaction(@PathVariable Long id) {
         try {

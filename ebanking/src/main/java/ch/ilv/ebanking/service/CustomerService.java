@@ -1,8 +1,13 @@
-package ch.ilv.ebanking.customer;
+package ch.ilv.ebanking.service;
 
 import ch.ilv.ebanking.base.MessageResponse;
+import ch.ilv.ebanking.model.Customer;
+import ch.ilv.ebanking.repository.CustomerRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -43,5 +48,14 @@ public class CustomerService {
     public MessageResponse deleteCustomer(Long id) {
         repository.deleteById(id);
         return new MessageResponse("Customer " + id + " deleted");
+    }
+
+    public Customer getCustomerByJwt(Jwt jwt){
+        String userName = jwt.getClaimAsString("preferred_username");
+        return this.repository.getCustomerByUserName(userName)
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                "There doesn't exist a User with the Username " + userName )
+                );
     }
 }

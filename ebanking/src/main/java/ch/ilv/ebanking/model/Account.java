@@ -1,6 +1,5 @@
-package ch.ilv.ebanking.account;
+package ch.ilv.ebanking.model;
 
-import ch.ilv.ebanking.customer.Customer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -16,8 +15,8 @@ public class Account {
     @Size(max = 100)
     @NotEmpty
     private String accountName;
-    private long balance;
-    @OneToOne(optional = false)
+    private double balance;
+    @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

@@ -1,5 +1,6 @@
-package ch.ilv.ebanking.transaction;
+package ch.ilv.ebanking.repository;
 
+import ch.ilv.ebanking.model.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

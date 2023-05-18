@@ -1,9 +1,9 @@
 package ch.ilv.ebanking;
 
-import ch.ilv.ebanking.address.Address;
-import ch.ilv.ebanking.address.AddressController;
-import ch.ilv.ebanking.address.AddressRepository;
-import ch.ilv.ebanking.address.AddressService;
+import ch.ilv.ebanking.model.Address;
+import ch.ilv.ebanking.controller.AddressController;
+import ch.ilv.ebanking.repository.AddressRepository;
+import ch.ilv.ebanking.service.AddressService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

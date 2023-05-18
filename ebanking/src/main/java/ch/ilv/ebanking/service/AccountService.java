@@ -1,7 +1,10 @@
-package ch.ilv.ebanking.account;
+package ch.ilv.ebanking.service;
 
 import ch.ilv.ebanking.base.MessageResponse;
+import ch.ilv.ebanking.model.Account;
+import ch.ilv.ebanking.repository.AccountRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,5 +44,9 @@ public class AccountService {
     public MessageResponse deleteAccount(Long id) {
         repository.deleteById(id);
         return new MessageResponse("Account " + id + " deleted");
+    }
+
+    public List<Account> getAccountsOfCustomer(long customerId){
+        return this.repository.findAccountByCustomerId(customerId);
     }
 }

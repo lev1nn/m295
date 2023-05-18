@@ -1,6 +1,8 @@
-package ch.ilv.ebanking.address;
+package ch.ilv.ebanking.service;
 
 import ch.ilv.ebanking.base.MessageResponse;
+import ch.ilv.ebanking.model.Address;
+import ch.ilv.ebanking.repository.AddressRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
