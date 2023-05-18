@@ -9,11 +9,13 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.relation.Role;
 import java.util.List;
 
 @SecurityRequirement(name="bearerAuth")
@@ -66,5 +68,12 @@ public class CustomerController {
         } catch (Throwable t) {
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+
+    @GetMapping("api/customer/whoami")
+    @RolesAllowed(Roles.Read)
+    public ResponseEntity<Customer> whoami(@AuthenticationPrincipal Jwt jwt){
+        return ResponseEntity.ok(this.customerService.getCustomerByJwt(jwt));
     }
 }

@@ -63,7 +63,7 @@ public class AccountController {
     }
 
     @GetMapping("api/account/customer/{id}")
-    @RolesAllowed(Roles.Admin)
+    @RolesAllowed(Roles.Read)
     public ResponseEntity<List<Account>> getAccountsOfCustomer(@PathVariable("id") Long customerId){
         return ResponseEntity.ok(this.accountService.getAccountsOfCustomer(customerId));
     }
