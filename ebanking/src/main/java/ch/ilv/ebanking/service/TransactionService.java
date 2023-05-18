@@ -1,6 +1,7 @@
 package ch.ilv.ebanking.service;
 
 import ch.ilv.ebanking.base.MessageResponse;
+import ch.ilv.ebanking.model.Account;
 import ch.ilv.ebanking.model.Transaction;
 import ch.ilv.ebanking.repository.TransactionRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -11,9 +12,10 @@ import java.util.List;
 @Service
 public class TransactionService {
     private final TransactionRepository repository;
-
-    public TransactionService(TransactionRepository repository) {
+    private final AccountService accountService;
+    public TransactionService(TransactionRepository repository, AccountService accountService) {
         this.repository = repository;
+        this.accountService = accountService;
     }
 
     public List<Transaction> getTransactions() {
@@ -26,8 +28,15 @@ public class TransactionService {
     }
 
     public Transaction insertTransaction(Transaction transaction) {
-        transaction.getPayingAccount().setBalance((long) (transaction.getPayingAccount().getBalance() - transaction.getAmount()));
-        transaction.getReceivingAccount().setBalance((long) (transaction.getReceivingAccount().getBalance() + transaction.getAmount()));
+        Account payingAccount = this.accountService.getAccount(transaction.getPayingAccount().getId());
+        Account receivingAccount = this.accountService.getAccount(transaction.getReceivingAccount().getId());
+
+        payingAccount.setBalance(payingAccount.getBalance() - transaction.getAmount());
+        receivingAccount.setBalance(receivingAccount.getBalance() + transaction.getAmount());
+
+        this.accountService.updateAccount(payingAccount, transaction.getPayingAccount().getId());
+        this.accountService.updateAccount(receivingAccount, transaction.getReceivingAccount().getId());
+
         return repository.save(transaction);
     }
 

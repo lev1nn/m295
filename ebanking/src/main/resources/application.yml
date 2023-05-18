@@ -16,3 +16,6 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: https://sso.bbzbl-it.dev/realms/ILV
+server:
+  error:
+    include-message: always

@@ -15,8 +15,8 @@ public class Account {
     @Size(max = 100)
     @NotEmpty
     private String accountName;
-    private long balance;
-    @OneToOne(optional = false)
+    private double balance;
+    @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
