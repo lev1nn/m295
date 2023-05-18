@@ -5,6 +5,7 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     url: jdbc:postgresql://localhost:5432/ebanking
     username: postgres
@@ -14,4 +15,4 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/ILV
+          issuer-uri: https://sso.bbzbl-it.dev/realms/ILV

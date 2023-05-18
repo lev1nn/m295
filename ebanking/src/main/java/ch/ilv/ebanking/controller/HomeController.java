@@ -1,4 +1,4 @@
-package ch.ilv.ebanking.home;
+package ch.ilv.ebanking.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

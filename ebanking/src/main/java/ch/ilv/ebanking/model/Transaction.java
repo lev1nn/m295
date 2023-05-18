@@ -1,8 +1,7 @@
-package ch.ilv.ebanking.transaction;
+package ch.ilv.ebanking.model;
 
-import ch.ilv.ebanking.account.Account;
+import ch.ilv.ebanking.model.Account;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data

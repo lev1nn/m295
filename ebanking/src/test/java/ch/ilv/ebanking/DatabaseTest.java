@@ -1,7 +1,7 @@
 package ch.ilv.ebanking;
 
-import ch.ilv.ebanking.address.Address;
-import ch.ilv.ebanking.address.AddressRepository;
+import ch.ilv.ebanking.model.Address;
+import ch.ilv.ebanking.repository.AddressRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

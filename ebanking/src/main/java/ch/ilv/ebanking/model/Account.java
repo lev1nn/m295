@@ -1,6 +1,5 @@
-package ch.ilv.ebanking.account;
+package ch.ilv.ebanking.model;
 
-import ch.ilv.ebanking.customer.Customer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

@@ -1,5 +1,6 @@
-package ch.ilv.ebanking.address;
+package ch.ilv.ebanking.repository;
 
+import ch.ilv.ebanking.model.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

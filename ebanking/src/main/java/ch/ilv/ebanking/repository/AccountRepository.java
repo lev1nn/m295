@@ -1,5 +1,6 @@
-package ch.ilv.ebanking.account;
+package ch.ilv.ebanking.repository;
 
+import ch.ilv.ebanking.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

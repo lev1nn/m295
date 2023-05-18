@@ -1,6 +1,8 @@
-package ch.ilv.ebanking.customer;
+package ch.ilv.ebanking.controller;
 
 import ch.ilv.ebanking.base.MessageResponse;
+import ch.ilv.ebanking.service.CustomerService;
+import ch.ilv.ebanking.model.Customer;
 import ch.ilv.ebanking.security.Roles;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.annotation.security.RolesAllowed;

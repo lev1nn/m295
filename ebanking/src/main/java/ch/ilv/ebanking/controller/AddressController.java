@@ -1,6 +1,8 @@
-package ch.ilv.ebanking.address;
+package ch.ilv.ebanking.controller;
 
+import ch.ilv.ebanking.service.AddressService;
 import ch.ilv.ebanking.base.MessageResponse;
+import ch.ilv.ebanking.model.Address;
 import ch.ilv.ebanking.security.Roles;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.annotation.security.RolesAllowed;
