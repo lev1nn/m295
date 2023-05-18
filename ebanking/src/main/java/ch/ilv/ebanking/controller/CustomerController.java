@@ -26,7 +26,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("api/Customer")
+    @GetMapping("api/customer")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<List<Customer>> all() {
         Jwt user = (Jwt)SecurityContextHolder.getContext().getAuthentication()
@@ -37,28 +37,28 @@ public class CustomerController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("api/Customer/{id}")
+    @GetMapping("api/customer/{id}")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<Customer> one(@PathVariable Long id) {
         Customer customer = customerService.getCustomer(id);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
-    @PostMapping("api/Customer")
+    @PostMapping("api/customer")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<Customer> newCustomer(@Valid @RequestBody Customer customer) {
         Customer savedCustomer = customerService.insertCustomer(customer);
         return new ResponseEntity<>(savedCustomer, HttpStatus.OK);
     }
 
-    @PutMapping("api/Customer/{id}")
+    @PutMapping("api/customer/{id}")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<Customer> updateCustomer(@Valid @RequestBody Customer customer, @PathVariable Long id) {
         Customer savedCustomer = customerService.updateCustomer(customer, id);
         return new ResponseEntity<>(savedCustomer, HttpStatus.OK);
     }
 
-    @DeleteMapping("api/Customer/{id}")
+    @DeleteMapping("api/customer/{id}")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<MessageResponse> deleteCustomer(@PathVariable Long id) {
         try {

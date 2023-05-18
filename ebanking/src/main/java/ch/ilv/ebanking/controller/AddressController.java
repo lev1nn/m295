@@ -24,35 +24,35 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @GetMapping("api/Address")
+    @GetMapping("api/address")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<List<Address>> all() {
         List<Address> result = addressService.getAddresses();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("api/Address/{id}")
+    @GetMapping("api/address/{id}")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<Address> one(@PathVariable Long id) {
         Address address = addressService.getAddress(id);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
 
-    @PostMapping("api/Address")
+    @PostMapping("api/address")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<Address> newAddress(@Valid @RequestBody Address address) {
         Address savedAddress = addressService.insertAddress(address);
         return new ResponseEntity<>(savedAddress, HttpStatus.OK);
     }
 
-    @PutMapping("api/Address/{id}")
+    @PutMapping("api/address/{id}")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<Address> updateAddress(@Valid @RequestBody Address address, @PathVariable Long id) {
         Address savedAddress = addressService.updateAddress(address, id);
         return new ResponseEntity<>(savedAddress, HttpStatus.OK);
     }
 
-    @DeleteMapping("api/Address/{id}")
+    @DeleteMapping("api/address/{id}")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<MessageResponse> deleteAddress(@PathVariable Long id) {
         try {

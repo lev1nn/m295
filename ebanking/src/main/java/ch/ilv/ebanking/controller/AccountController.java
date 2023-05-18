@@ -24,35 +24,35 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping("api/Account")
+    @GetMapping("api/account")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<List<Account>> all() {
         List<Account> result = accountService.getAccounts();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("api/Account/{id}")
+    @GetMapping("api/account/{id}")
     @RolesAllowed(Roles.Read)
     public ResponseEntity<Account> one(@PathVariable Long id) {
         Account account = accountService.getAccount(id);
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
-    @PostMapping("api/Account")
+    @PostMapping("api/account")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<Account> newAccount(@Valid @RequestBody Account account) {
         Account savedAccount = accountService.insertAccount(account);
         return new ResponseEntity<>(savedAccount, HttpStatus.OK);
     }
 
-    @PutMapping("api/Account/{id}")
+    @PutMapping("api/account/{id}")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<Account> updateAccount(@Valid @RequestBody Account account, @PathVariable Long id) {
         Account savedAccount = accountService.updateAccount(account, id);
         return new ResponseEntity<>(savedAccount, HttpStatus.OK);
     }
 
-    @DeleteMapping("api/Account/{id}")
+    @DeleteMapping("api/account/{id}")
     @RolesAllowed(Roles.Admin)
     public ResponseEntity<MessageResponse> deleteAccount(@PathVariable Long id) {
         try {
