@@ -15,7 +15,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://sso.bbzbl-it.dev/realms/ILV
+          issuer-uri: http://localhost:8080/realms/ILV # https://sso.bbzbl-it.dev/realms/ILV
 server:
   error:
     include-message: always
