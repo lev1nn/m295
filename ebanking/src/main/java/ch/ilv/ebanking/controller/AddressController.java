@@ -46,7 +46,7 @@ public class AddressController {
     }
 
     @PutMapping("api/address/{id}")
-    @RolesAllowed(Roles.Admin)
+    @RolesAllowed(Roles.Update)
     public ResponseEntity<Address> updateAddress(@Valid @RequestBody Address address, @PathVariable Long id) {
         Address savedAddress = addressService.updateAddress(address, id);
         return new ResponseEntity<>(savedAddress, HttpStatus.OK);

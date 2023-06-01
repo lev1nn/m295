@@ -39,7 +39,7 @@ public class TransactionController {
     }
 
     @PostMapping("api/transaction")
-    @RolesAllowed(Roles.Admin)
+    @RolesAllowed(Roles.Update)
     public ResponseEntity<Transaction> newTransaction(@Valid @RequestBody Transaction transaction) {
         Transaction savedTransaction = transactionService.insertTransaction(transaction);
         return new ResponseEntity<>(savedTransaction, HttpStatus.OK);

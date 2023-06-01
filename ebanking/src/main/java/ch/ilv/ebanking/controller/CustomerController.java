@@ -54,7 +54,7 @@ public class CustomerController {
     }
 
     @PutMapping("api/customer/{id}")
-    @RolesAllowed(Roles.Admin)
+    @RolesAllowed(Roles.Update)
     public ResponseEntity<Customer> updateCustomer(@Valid @RequestBody Customer customer, @PathVariable Long id) {
         Customer savedCustomer = customerService.updateCustomer(customer, id);
         return new ResponseEntity<>(savedCustomer, HttpStatus.OK);

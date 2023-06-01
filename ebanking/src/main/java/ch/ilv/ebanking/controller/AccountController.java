@@ -67,6 +67,4 @@ public class AccountController {
     public ResponseEntity<List<Account>> getAccountsOfCustomer(@PathVariable("id") Long customerId){
         return ResponseEntity.ok(this.accountService.getAccountsOfCustomer(customerId));
     }
-
-
 }
